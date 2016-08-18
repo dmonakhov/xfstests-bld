@@ -32,7 +32,7 @@ print_help ()
     echo "	--no-zero	- Do not run tests w/ zero range"
     if test "$GCE_XFSTESTS" != "yes" ; then
 	echo "	--kernel file	- Boot the specified kernel"
-
+	echo "	--initrd initrd	- Boot the specified initrd"
     else
 	echo "GCE speciffic commands:"
 	echo "	ls-instances"
@@ -280,6 +280,12 @@ while [ "$1" != "" ]; do
 		      KERNEL="$KERNEL/arch/x86/boot/bzImage"
 		  fi
 		  OVERRIDE_KERNEL="$KERNEL"
+		  ;;
+	--initrd) shift
+		  INITRD="$1"
+		  if test ! -f "$INITRD" ; then
+		      print_help
+		  fi
 		  ;;
 	--local-ssd)
 	    if test "$GCE_XFSTESTS" = "yes"
