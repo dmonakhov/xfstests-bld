@@ -1,0 +1,4 @@
+
+# TODO: remove this after  mkfs.xfs build fix will be committed to mainstream git
+XFSPROGS_GIT=https://github.com/dmonakhov/xfsprogs.git
+XFSPROGS_COMMIT=5dc7a0805d6b7a2
