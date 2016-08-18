@@ -30,6 +30,7 @@ then
 fi
 
 QUIET="quiet loglevel=0"
+which pigz &>/dev/null && GZIP=pigz || GZIP=gzip
 
 get_local_hash()
 {
@@ -428,7 +429,7 @@ then
     if test -d "$GCE_HOOKS"
     then
 	tmpfile=$(mktemp)
-	tar -C "$GCE_HOOKS" -cf - . | gzip -9n > "$tmpfile"
+	tar -C "$GCE_HOOKS" -cf - . | $GZIP -9n > "$tmpfile"
 	GCE_HOOKS=$tmpfile
 	GS_HOOKS=gs://$GS_BUCKET/hooks.tar.gz
     else
@@ -471,7 +472,7 @@ then
 	exit 1
     fi
     (cd "$DIR/test-appliance"; \
-     tar -X gce-exclude-files -C files -cf - . | gzip -9n > $LOCAL_FILES)
+     tar -X gce-exclude-files -C files -cf - . | $GZIP -9n > $LOCAL_FILES)
     get_local_hash "$LOCAL_FILES"
     get_remote_hash "$GS_FILES"
     if test "$LOCAL_HASH" != "$REMOTE_HASH"

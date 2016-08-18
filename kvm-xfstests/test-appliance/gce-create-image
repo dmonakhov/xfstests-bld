@@ -36,6 +36,7 @@ IMAGE_FAMILY=debian-8
 IMAGE_PROJECT=debian-cloud
 GS_TAR="gs://$GS_BUCKET/gce-xfstests.image.tar.gz"
 TARBALL=../../xfstests.tar.gz
+type pigz &>/dev/null && GZIP=pigz || GZIP=gzip
 
 if ! test -f $TARBALL ; then
    echo $TARBALL does not exist!
@@ -86,7 +87,7 @@ then
     cat ../../*.ver > files/root/xfstests/git-versions
 fi
 
-tar -X gce-exclude-files -C files -cf - . | gzip -9n > $t
+tar -X gce-exclude-files -C files -cf - . | $GZIP -9n > $t
 GS_FILES_TARBALL=gs://$GS_BUCKET/files.tar.gz
 
 LOCAL_HASH=$(gsutil hash $t 2> /dev/null |  grep "Hash (md5)" | awk '{print $3}')
