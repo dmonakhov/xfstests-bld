@@ -434,3 +434,4 @@ done
 
 [ -e /proc/slabinfo ] && cp /proc/slabinfo /results/slabinfo.after
 cp /proc/meminfo /results/meminfo.after
+umount /results
