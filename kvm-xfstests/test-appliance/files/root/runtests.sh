@@ -437,4 +437,9 @@ done
 
 [ -e /proc/slabinfo ] && cp /proc/slabinfo /results/slabinfo.after
 cp /proc/meminfo /results/meminfo.after
+
+if test -n "$FSTEST_ARCHIVE"; then
+    tar -C /results --exclude /results/results.tar.xz -cf - . | \
+	xz -6e > /results/results.tar.xz
+fi
 umount /results
