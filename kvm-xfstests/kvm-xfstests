@@ -90,11 +90,11 @@ mkdir -p /tmp/kvm-xfstests-$USER
 $NO_ACTION $IONICE $QEMU -boot order=c $NET \
 	-machine type=pc,accel=kvm:tcg \
 	-drive file=$ROOT_FS,if=virtio$SNAPSHOT \
-	-drive file=$VDB,cache=none,if=virtio,format=raw \
-	-drive file=$VDC,cache=none,if=virtio,format=raw \
-	-drive file=$VDD,cache=none,if=virtio,format=raw \
-	-drive file=$VDE,cache=none,if=virtio,format=raw \
-	-drive file=$VDF,cache=none,if=virtio,format=raw \
+	-drive file=$VDB,cache=$CACHE,if=virtio,format=raw \
+	-drive file=$VDC,cache=$CACHE,if=virtio,format=raw \
+	-drive file=$VDD,cache=$CACHE,if=virtio,format=raw \
+	-drive file=$VDE,cache=$CACHE,if=virtio,format=raw \
+	-drive file=$VDF,cache=$CACHE,if=virtio,format=raw \
 	-drive file=$VDG,cache=none,if=virtio,format=raw \
 	-drive file=$VDH,cache=unsafe,readonly,if=virtio \
 	-vga none -nographic -smp $NR_CPU -m $MEM \

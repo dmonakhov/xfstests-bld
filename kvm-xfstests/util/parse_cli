@@ -320,6 +320,10 @@ while [ "$1" != "" ]; do
 	    supported_flavors kvm
 	    NO_VIRTIO_RNG=yes
 	    ;;
+	--cache) shift
+	    supported_flavors kvm
+	    CACHE="$1"
+	    ;;
 	smoke)
 	    if test -n "$FSTESTCFG" ; then
 		echo "You can use either '-c' or 'smoke', not both! " \

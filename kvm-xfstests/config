@@ -33,6 +33,7 @@ VDD=$DIR/disks/vdd
 VDE=$DIR/disks/vde
 VDF=$DIR/disks/vdf
 VDG=$DIR/disks/vdg
+CACHE=none
 
 IFUP=$DIR/util/qemu-ifup
 IFDOWN=$DIR/util/qemu-ifdown
