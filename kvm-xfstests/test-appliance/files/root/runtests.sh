@@ -96,6 +96,9 @@ while [ "$1" != "" ]; do
 	ALL_XFS_IO_AVOID="$ALL_XFS_IO_AVOID zero"
 	FSTESTSET="$FSTESTSET -x zero"
 	;;
+    extra_opt) shift
+	EXTRA_OPT="$EXTRA_OPT $1"
+	;;
     *)
 	echo " "
 	echo "Unrecognized option $i"
@@ -386,7 +389,7 @@ do
 	gce_run_hooks fs-config-begin $i
 	for j in $(seq 1 $RPT_COUNT) ; do
 	    gce_run_hooks pre-xfstests $i $j
-	    bash ./check -T $AEX $TEST_SET_EXCLUDE $FSTESTSET
+	    bash ./check -T $EXTRA_OPT $AEX $TEST_SET_EXCLUDE $FSTESTSET
 	    gce_run_hooks post-xfstests $i $j
 	    umount "$TEST_DEV" >& /dev/null
 	    check_filesystem "$TEST_DEV" >& $RESULT_BASE/fsck.out
